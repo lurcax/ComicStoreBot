@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comic Store Chatbot</title>
+    <style>
+        body {
+            background-color: #FFEDDE;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #FF9900;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            margin-bottom: 10px;
+            width: 300px;
+            border: none;
+            background-color: #FFF;
+            color: #333;
+            border-radius: 8px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #FF9900;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #FFF;
+            width: 320px;
+            height: 500px;
+            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            background-color: #FF9900;
+            color: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            max-width: 80%;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #007AFF;
+        }
+
+        strong {
+            color: #00FF9B;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const messages = document.querySelectorAll('.message');
+            
+            messages.forEach((message, index) => {
+                setTimeout(() => {
+                    message.classList.add('visible');
+                }, index * 300);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Tire suas dúvidas com o nosso Chatbot</h1>
+    
+    <div class="message-container">
+        <div class="message user-message">
+            <p><strong>Você:</strong> {{ user_input }}</p>
+        </div>
+        <div class="message">
+            <p><strong>Bot:</strong> {{ response }}</p>
+        </div>
+        <!-- Add more messages here -->
+    </div>
+    <form action="/" method="post">
+        <input type="text" name="user_input" placeholder="Digite sua dúvida">
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
